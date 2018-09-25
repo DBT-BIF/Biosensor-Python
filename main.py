@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# coding=utf-8
+
+
 from src.phylogeny_travel import TravelPhylogeny as phyl
 import os
 import re
