@@ -38,7 +38,7 @@ import or create object in class TravelPhylogeny in   ~src/phylogeny_travel.py
 
 - Clone repository `git clone `
 - Install depndencies
-- change path of files in `~src/phylogeny_travel.py` for downloading
+- Unzip files in `data` folder
 - run `main.py`
 
 
