@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # coding=utf-8
+# python version == 2.7
 
 
 import os
 import re
-from .kmer import *
+from kmer import *
 
 class TravelPhylogeny(object):
     
@@ -18,7 +19,7 @@ class TravelPhylogeny(object):
 
     
     
-    def Graph_from_sqldb(sqlite_db):
+    def Graph_from_sqldb(self,sqlite_db):
         
         ## @title : creating a graph from sqlitedb
         
@@ -27,16 +28,16 @@ class TravelPhylogeny(object):
         import sqlite3
         
         conn = sqlite3.connect(sqlite_db)
-        print("sqlite database connected")
+        print "sqlite database connected"
         df = pd.read_sql_query("select * from species;", conn)
-        print(df.head())
+        print df.head()
         G = nx.DiGraph(directed = True)
         i = 0
         for taxaid in df['taxid']:
             G.add_node(taxaid, name=str(df.iloc[i][2]), rank=str(df.iloc[i][4]), genome = [])
             i = i+1
         df = df[df['taxid'] != 1]
-        print(df.head(n = 20))
+        print (df.head(n = 20))
 
         ## adding edges for Graph
         edge_list = []
@@ -53,22 +54,22 @@ class TravelPhylogeny(object):
     
     
     
-    def assembly_file_process(assembly_file_name):
+    def assembly_file_process(self,assembly_file_name):
         
         ## @title : Process assembly files to add full ftp path
         
         import os
         import pandas as pd
-        import subprocess
+        import commands
         
         grep_assembly = "grep -E '.*' " + assembly_file_name +" | cut -f 20 > ftp_folder.txt2"
-        print (grep_assembly)
+        print grep_assembly
         os.system(grep_assembly)
         os.system(str("sed '1d' ftp_folder.txt2 > ftp_folder3.txt"))
         
         cmd = """awk 'BEGIN{FS=OFS="/";filesuffix="genomic.fna.gz"}{ftpdir=$0;asm=$10;file=asm"_"filesuffix;print "wget -nc "ftpdir,file}' ftp_folder3.txt > all_wget_link.sh"""
 
-        subprocess.getstatusoutput(cmd)
+        commands.getstatusoutput(cmd)
 
         with open('all_wget_link.sh') as f:
             all_links = f.read().splitlines()
@@ -82,7 +83,7 @@ class TravelPhylogeny(object):
 
 
     
-    def pust_list_and_node(node,dnamer):
+    def pust_list_and_node(self,node,dnamer):
         
         from pymongo import MongoClient
         import pymongo
@@ -90,7 +91,7 @@ class TravelPhylogeny(object):
         client = pymongo.MongoClient("mongodb://localhost:27017/")
         db = client["mydatabase1"]
         posts = db.posts
-        print (posts)
+        print posts
         
         post_data = {'_id':node,
                      'dnamer': dnamer,
@@ -103,7 +104,7 @@ class TravelPhylogeny(object):
     
     
     
-    def search_db(node):
+    def search_db(self,node):
         import pymongo
         client = pymongo.MongoClient("mongodb://localhost:27017/")
         db = client["mydatabase1"]
@@ -115,7 +116,7 @@ class TravelPhylogeny(object):
     
     
     
-    def put_list_node_in_gzip(node,dnamer):
+    def put_list_node_in_gzip(self,node,dnamer):
         import gzip
         filename = str(node)+".gzip"
         with gzip.open("kmer_folder/" + filename, 'w') as fw:
@@ -125,7 +126,7 @@ class TravelPhylogeny(object):
         
         
         
-    def write_path(filename,path):
+    def write_path(self,filename,path):
         
         ## @title : write the fpath to be traveled in text gzip file
         
@@ -140,7 +141,7 @@ class TravelPhylogeny(object):
             
             
             
-    def find_file_and_node_in_directory(directory_path):
+    def find_file_and_node_in_directory(self,directory_path):
         
         ## @title : return filename with extension and file name without extension
         
@@ -156,7 +157,7 @@ class TravelPhylogeny(object):
     
     
     
-    def read_gzip_file_in_list(filename):
+    def read_gzip_file_in_list(self,filename):
         
         ## @title : Read gzip line by line
         
@@ -171,16 +172,10 @@ class TravelPhylogeny(object):
     
     
     
-    def create_seed_mer(seed,G,k=100):
+    def create_seed_mer(self,seed,G,k=100):
         
         """ Download and create kmer from seed ftp link files
             Take a seed node and create kmer """
-
-
-
-
-
-
 
 
         all_dna_mer = []
@@ -189,7 +184,7 @@ class TravelPhylogeny(object):
             try:
                 os.system(link)
             except:
-                print ('No links found in seedmer')
+                print 'No links found in seedmer'
             fileName = str(re.findall('(?:.+\/)(.+)',link)[0])
             dna_mer = create_kmer(fileName,k)
             all_dna_mer.append(list(dna_mer))
@@ -198,7 +193,7 @@ class TravelPhylogeny(object):
     
     
     
-    def create_and_save_kmer_from_path_of_search_space(G,k,seed_mer,path_of_search_space):
+    def create_and_save_kmer_from_path_of_search_space(self,G,k,seed_mer,path_of_search_space):
 
         
         """ 
@@ -212,7 +207,7 @@ class TravelPhylogeny(object):
         import pandas as pd
         
         completed_node=[]
-        folderfiles, name = find_file_and_node_in_directory('kmer_folder/')
+        folderfiles, name = self.find_file_and_node_in_directory('kmer_folder/')
         df = pd.DataFrame(columns=['filename', 'seed_mer_length'])
         df = df.append({'fileName':path_of_search_space[0], 'seed_mer_length':len(seed_mer)},
                           ignore_index=True )
@@ -221,7 +216,7 @@ class TravelPhylogeny(object):
         for i in name:
             completed_node.append(int(i))
         for node in path_of_search_space[1:]:
-            print (node)
+            print node
             
             if node in completed_node:
                 continue
@@ -243,8 +238,11 @@ class TravelPhylogeny(object):
                     print (fileName,len(seed_mer))
                     df = df.append({'fileName':fileName,'seed_mer_length':len(seed_mer)},ignore_index=True )
                     df.to_csv('plot_data.csv', sep='\t')
-            #put_list_node_in_gzip(node=node,dnamer=sum(all_dna_mer, []))
 
+
+
+
+            
 
 
 
