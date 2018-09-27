@@ -2,10 +2,7 @@
 # coding=utf-8
 # Python version = 2.7.15
 
-import sys
-sys.path.append('/src/phylogeny_travel')
-from phylogeny_travel import TravelPhylogeny
-
+from src.phylogeny_travel import TravelPhylogeny
 import os
 import re
 from time import sleep
