@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # coding=utf-8
-# python version == 2.7
+#python version == 2.7
 
+""" Authors : Rakesh Sharma, Bharat Singh """
 
 import os
 import re
-from kmer import *
+
 
 class TravelPhylogeny(object):
     
@@ -78,6 +79,34 @@ class TravelPhylogeny(object):
         
         return assembly
 
+
+
+	def create_kmer(self,fileName,k):
+        
+    		## @title : Create kmer from a gzip fasta file
+        
+    		import re
+    		import gzip
+    		from Bio import SeqIO
+        
+    		reverse_records = []
+    		records = []
+        
+    		with gzip.open(fileName, "rt") as handle:
+        		for record in SeqIO.parse(handle, "fasta"):
+            		reverse = re.sub('[^GATC]', "", str(record.seq.reverse_complement()).upper())
+            		reverse_records.append(reverse)
+            		sequence = re.sub('[^GATC]', "", str(record.seq).upper())
+            		records.append(sequence)
+    		all_records = records + reverse_records
+    		dna_kmer=[]
+    		for dna in all_records:
+        		if len(dna)>=100:
+            			for i in range(len(dna)-k+1):
+                			dna_kmer.append(dna[i:i+k])
+        		else:
+            			print 'Tiny Genome'
+    		return dna_kmer
 
 
 
@@ -186,7 +215,7 @@ class TravelPhylogeny(object):
             except:
                 print 'No links found in seedmer'
             fileName = str(re.findall('(?:.+\/)(.+)',link)[0])
-            dna_mer = create_kmer(fileName,k)
+            dna_mer = self.create_kmer(fileName,k)
             all_dna_mer.append(list(dna_mer))
             
         return set(sum(all_dna_mer, []))
@@ -232,12 +261,13 @@ class TravelPhylogeny(object):
                         True
                     
                     fileName = str(re.findall('(?:.+\/)(.+)',link)[0])
-                    dna_mer = set(create_kmer(fileName,k))
+                    dna_mer = set(self.create_kmer(fileName,k))
                     seed_mer = seed_mer - dna_mer
                     #all_dna_mer.append(list(dna_mer))
                     print (fileName,len(seed_mer))
                     df = df.append({'fileName':fileName,'seed_mer_length':len(seed_mer)},ignore_index=True )
                     df.to_csv('plot_data.csv', sep='\t')
+
 
 
 
