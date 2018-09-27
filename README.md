@@ -1,12 +1,12 @@
 # Python Class - Create Biosensor and Travel Phylogeny of life 
 
 
-### Discription 
+## Discription 
 **Create Biosensor and Travel Phylogeny of life -** Python Class for Making DNA-Sensors by Creating Phylogeny of life includes Searching, Traversing, Making Graphs, Downloading Genomic Data using ftp and Creating K-mers manually to accelerate development project of Biosensors in BioInformatics.
 Extremely easy to learn and use, friendly construction.
 
 ### Python version - `2.7.15 `
-### Dependencies 
+## Dependencies 
 
 - Networkx
 - Biopython
@@ -14,7 +14,7 @@ Extremely easy to learn and use, friendly construction.
 Install missing dependencies using [Pip](https://pypi.org/project/pip/)
 
 
-### Usage
+## Usage
 
 ```python
 
@@ -35,7 +35,7 @@ pyhton main.py
 import or create object in class TravelPhylogeny in   ~src/phylogeny_travel.py 
 ```
 
-### Setup
+## Setup
 
 - `Setup Python version == 2.7.15`
 - Clone repository `git clone https://github.com/DBT-BIF/Biosensor-Python.git `
@@ -44,13 +44,13 @@ import or create object in class TravelPhylogeny in   ~src/phylogeny_travel.py
 - run `main.py`
 
 
-### Graphs
+## Graphs
 
 Graph of all node is in `all_node_graph`
 
 
 
-### License
+## License
 
 
 MIT License
@@ -79,7 +79,7 @@ SOFTWARE.
 
 
 
-### Contributors 
+## Contributors 
 
 - [Rakesh sharma](https://github.com/rakesh691)
 - [Bharat Purohit](https://github.com/bharatpurohit97)
