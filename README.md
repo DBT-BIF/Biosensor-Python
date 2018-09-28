@@ -10,8 +10,8 @@ Extremely easy to learn and use, friendly construction.
 
 - Networkx
 - Biopython
-
-Install missing dependencies using [Pip](https://pypi.org/project/pip/)
+- Pandas
+- Sqlite3 
 
 
 ## Usage
@@ -20,28 +20,31 @@ Install missing dependencies using [Pip](https://pypi.org/project/pip/)
 
 pip install networkx
 pip install biopython
+pip install pandas
 
 ```
 
 
 ```console
 
-pyhton main.py
+sudo apt-get install sqlite3
 
 ```
- or 
+then, Run main.py
 
 ```
-import or create object in class TravelPhylogeny in   ~src/phylogeny_travel.py 
+python main.py
 ```
 
 ## Setup
 
 - `Setup Python version == 2.7.15`
 - Clone repository `git clone https://github.com/DBT-BIF/Biosensor-Python.git `
-- Install depndencies using pip : Networkx, Biopython
+- Install depndencies using pip : Networkx, Biopython, Pandas
+- Install sqlite3 ( DB browser for SQLite)
 - Unzip files in `data` folder
-- run `main.py`
+- Create two empty folders and name them as : path_travelled, kmer_folder 
+- finally run `main.py`
 
 
 ## Graphs
