@@ -47,11 +47,6 @@ python main.py
 - finally run `main.py`
 
 
-## Graphs
-
-Graph of all node is in `all_node_graph`
-
-
 
 ## License
 
