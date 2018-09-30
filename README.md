@@ -47,6 +47,12 @@ python main.py
 - finally run `main.py`
 
 
+## Statistic Plot -
+![sensor plot](https://github.com/DBT-BIF/Biosensor-Python/blob/master/plot-sensor.png)
+
+
+
+
 
 ## License
 
