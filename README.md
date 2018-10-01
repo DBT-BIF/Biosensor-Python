@@ -2,7 +2,7 @@
 
 
 ## Discription 
-**Create Biosensor and Travel Phylogeny of life -** Python Class for Making DNA-Sensors by Creating Phylogeny of life includes Searching, Traversing, Making Graphs, Downloading Genomic Data using ftp and Creating K-mers manually to accelerate development project of Biosensors in BioInformatics.
+**Create Biosensor and Travel Phylogeny of life -** Python Class for Making DNA-Sensors by Creating Phylogeny of life includes Searching, Traversing, Making phylogeny Graph, Downloading Genomic Data using ftp and Creating K-mers manually to find unique Dna Fragment for target node and accelerate development project of Biosensors in BioInformatics.
 Extremely easy to learn and use, friendly construction.
 
 ### Python version - `2.7.15 `
