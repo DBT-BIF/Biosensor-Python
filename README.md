@@ -90,7 +90,8 @@ SOFTWARE.
 
 
 
-
+## Future Scope - 
+will be adding support for pyhton 3 in upcoming version.
 
 
 
