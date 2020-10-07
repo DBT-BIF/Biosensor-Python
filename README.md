@@ -91,7 +91,7 @@ SOFTWARE.
 
 
 ## Future Scope - 
-will be adding support for pyhton 3 in upcoming version.
+will be adding support for pyhton 3 and multiprocessing & multithreading of code in upcoming version.
 
 
 
